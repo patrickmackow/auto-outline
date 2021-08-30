@@ -1,9 +1,23 @@
 import * as React from "react";
+import { useStore } from "../context/storeContext";
 
-function List({ urls }: { urls?: string[] }) {
+function List() {
+  const { state, dispatch } = useStore();
+  const { urls } = state;
+
   return (
-    <ul>{urls && urls.map((url, index) => <li key={index}>{url}</li>)}</ul>
+    <ul>
+      {urls &&
+        urls.map((url, index) => (
+          <li key={index}>
+            {url}
+            <button onClick={() => dispatch({ type: "REMOVE_URL", url: url })}>
+              Remove
+            </button>
+          </li>
+        ))}
+    </ul>
   );
 }
 
-export { List };
+export default List;
