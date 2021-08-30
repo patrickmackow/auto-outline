@@ -3,12 +3,16 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.tsx",
+  entry: {
+    popup: "./src/index.tsx",
+    background: "./src/background.ts",
+  },
   mode: "development",
   devtool: "source-map",
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "bundle.js",
+    filename: "[name].js",
+    clean: true,
   },
   resolve: {
     extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
@@ -22,7 +26,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: "./src/index.html" }),
+    new HtmlWebpackPlugin({ template: "./src/index.html", chunks: ["popup"] }),
     new CopyPlugin({
       patterns: [{ from: "./src/manifest.json" }],
     }),
