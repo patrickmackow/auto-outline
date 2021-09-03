@@ -26,9 +26,11 @@ function matchesAny(patterns: string[], url: string) {
     patterns = changes.patterns.newValue || [];
   });
 
+  // This doesn't trigger when the browser location is manually updated,
+  // to do that the browser.webNavigation API is needed
   browser.webRequest.onBeforeRequest.addListener(
     redirectMatchUrls,
-    { urls: ["<all_urls>"] },
+    { urls: ["<all_urls>"], types: ["main_frame"] }, // Only listen for top level document requests
     ["blocking"]
   );
 })();
