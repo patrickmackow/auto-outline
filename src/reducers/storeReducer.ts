@@ -1,22 +1,25 @@
 type State = {
-  urls: string[];
+  patterns: string[];
 };
 
 type Action =
   | { type: "INIT"; state: State }
-  | { type: "ADD_URL"; url: string }
-  | { type: "REMOVE_URL"; url: string };
+  | { type: "ADD_PATTERN"; pattern: string }
+  | { type: "REMOVE_PATTERN"; pattern: string };
 
 function storeReducer(state: State, action: Action) {
-  console.log(action.type);
-
   switch (action.type) {
     case "INIT":
       return action.state;
-    case "ADD_URL":
-      return { ...state, urls: [...state.urls, action.url] };
-    case "REMOVE_URL":
-      return { ...state, urls: state.urls.filter((url) => url !== action.url) };
+    case "ADD_PATTERN":
+      return { ...state, patterns: [...state.patterns, action.pattern] };
+    case "REMOVE_PATTERN":
+      return {
+        ...state,
+        patterns: state.patterns.filter(
+          (pattern) => pattern !== action.pattern
+        ),
+      };
     default:
       throw new Error("Invalid action type");
   }

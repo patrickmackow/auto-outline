@@ -3,12 +3,12 @@ import * as browser from "webextension-polyfill";
 import { storeReducer, State, Action } from "../reducers/storeReducer";
 
 type Store = {
-  state: { urls: string[] };
+  state: { patterns: string[] };
   dispatch: React.Dispatch<Action>;
 };
 
 const initialState: State = {
-  urls: [],
+  patterns: [],
 };
 
 const StoreContext = React.createContext<Store | null>(null);
@@ -16,13 +16,12 @@ const StoreContext = React.createContext<Store | null>(null);
 function StoreProvider(props: any) {
   const [state, dispatch] = React.useReducer(storeReducer, initialState);
   const [status, setStatus] = React.useState("idle");
-  const ref = React.useRef();
 
   React.useEffect(() => {
     browser.storage.local.get().then((data) => {
       dispatch({
         type: "INIT",
-        state: { urls: data.urls ?? initialState.urls },
+        state: { patterns: data.patterns ?? initialState.patterns },
       });
       setStatus("success");
     });
@@ -31,7 +30,6 @@ function StoreProvider(props: any) {
 
   React.useEffect(() => {
     if (status !== "success") return;
-    console.log("saving to store.local", state);
     browser.storage.local.set(state);
   }, [state]);
 

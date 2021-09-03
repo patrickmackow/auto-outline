@@ -2,27 +2,27 @@ import * as React from "react";
 import { useStore } from "../context/storeContext";
 
 function Input() {
-  const [url, setUrl] = React.useState("");
+  const [pattern, setPattern] = React.useState("");
   const { dispatch } = useStore();
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setUrl(event.target.value);
+    setPattern(event.target.value);
   }
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    if (!url.length) {
+    if (!pattern.length) {
       return;
     }
 
-    dispatch({ type: "ADD_URL", url });
-    setUrl("");
+    dispatch({ type: "ADD_PATTERN", pattern });
+    setPattern("");
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" value={url} onChange={handleChange} />
+      <input type="text" value={pattern} onChange={handleChange} />
       <button type="submit">Add</button>
     </form>
   );

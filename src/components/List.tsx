@@ -3,15 +3,17 @@ import { useStore } from "../context/storeContext";
 
 function List() {
   const { state, dispatch } = useStore();
-  const { urls } = state;
+  const { patterns } = state;
 
   return (
     <ul>
-      {urls &&
-        urls.map((url, index) => (
+      {patterns &&
+        patterns.map((pattern, index) => (
           <li key={index}>
-            {url}
-            <button onClick={() => dispatch({ type: "REMOVE_URL", url: url })}>
+            {pattern}
+            <button
+              onClick={() => dispatch({ type: "REMOVE_PATTERN", pattern })}
+            >
               Remove
             </button>
           </li>
