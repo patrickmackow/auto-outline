@@ -21,7 +21,7 @@ function Input() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="Input">
       <input type="text" value={pattern} onChange={handleChange} />
       <button type="submit">Add</button>
     </form>

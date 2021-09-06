@@ -6,19 +6,25 @@ function List() {
   const { patterns } = state;
 
   return (
-    <ul>
-      {patterns &&
-        patterns.map((pattern, index) => (
-          <li key={index}>
-            {pattern}
-            <button
-              onClick={() => dispatch({ type: "REMOVE_PATTERN", pattern })}
-            >
-              Remove
-            </button>
-          </li>
-        ))}
-    </ul>
+    <div className="List">
+      {patterns.length ? (
+        <ul>
+          {patterns &&
+            patterns.map((pattern, index) => (
+              <li key={index}>
+                <span>{pattern}</span>
+                <button
+                  onClick={() => dispatch({ type: "REMOVE_PATTERN", pattern })}
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+        </ul>
+      ) : (
+        <div>Enter a pattern</div>
+      )}
+    </div>
   );
 }
 
