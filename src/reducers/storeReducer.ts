@@ -12,7 +12,7 @@ function storeReducer(state: State, action: Action) {
     case "INIT":
       return action.state;
     case "ADD_PATTERN":
-      return { ...state, patterns: [...state.patterns, action.pattern] };
+      return { ...state, patterns: [action.pattern, ...state.patterns] };
     case "REMOVE_PATTERN":
       return {
         ...state,
