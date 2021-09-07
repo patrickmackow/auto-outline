@@ -12,6 +12,10 @@ function storeReducer(state: State, action: Action) {
     case "INIT":
       return action.state;
     case "ADD_PATTERN":
+      // Don't add duplicate patterns
+      if (state.patterns.some((pattern) => pattern === action.pattern)) {
+        return state;
+      }
       return { ...state, patterns: [action.pattern, ...state.patterns] };
     case "REMOVE_PATTERN":
       return {
