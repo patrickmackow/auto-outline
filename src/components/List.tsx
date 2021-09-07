@@ -7,23 +7,29 @@ function List() {
 
   return (
     <div className="List">
-      {patterns.length ? (
-        <ul>
-          {patterns &&
-            patterns.map((pattern, index) => (
-              <li key={index}>
-                <span>{pattern}</span>
-                <button
-                  onClick={() => dispatch({ type: "REMOVE_PATTERN", pattern })}
+      <ul>
+        {patterns &&
+          patterns.map((pattern, index) => (
+            <li key={index}>
+              <span>{pattern}</span>
+              <button
+                onClick={() => dispatch({ type: "REMOVE_PATTERN", pattern })}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
                 >
-                  Remove
-                </button>
-              </li>
-            ))}
-        </ul>
-      ) : (
-        <div>Enter a pattern</div>
-      )}
+                  <path
+                    fillRule="evenodd"
+                    d="M5 10a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </li>
+          ))}
+      </ul>
     </div>
   );
 }
