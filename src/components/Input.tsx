@@ -1,9 +1,19 @@
 import * as React from "react";
 import { useStore } from "../context/storeContext";
+import * as browser from "webextension-polyfill";
+import MatchTooltip from "./MatchTooltip";
 
 function Input() {
   const [pattern, setPattern] = React.useState("");
   const { dispatch } = useStore();
+
+  const [tab, setTab] = React.useState<browser.Tabs.Tab | undefined>();
+
+  React.useEffect(() => {
+    browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+      setTab(tabs[0]);
+    });
+  }, []);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setPattern(event.target.value);
@@ -43,6 +53,7 @@ function Input() {
           </svg>
         </button>
       </form>
+      {tab?.url && <MatchTooltip pattern={pattern} url={tab.url} />}
     </div>
   );
 }

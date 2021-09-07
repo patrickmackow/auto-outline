@@ -110,3 +110,20 @@ button {
     }
   }
 }
+
+.MatchTooltip {
+  padding-top: 3px;
+  font-size: 12px;
+
+  &.success {
+    color: green;
+  }
+
+  &.failure {
+    color: red;
+  }
+
+  &.empty {
+    height: 17px;
+  }
+}

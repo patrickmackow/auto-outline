@@ -9,5 +9,11 @@
   "background": {
     "scripts": ["background.js"]
   },
-  "permissions": ["storage", "webRequest", "webRequestBlocking", "<all_urls>"]
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "tabs"
+  ]
 }
